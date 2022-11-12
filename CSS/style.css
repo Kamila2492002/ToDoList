@@ -1,0 +1,52 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+::after ::before {
+    box-sizing: inherit;
+}
+
+.body {
+    max-width: 1000px;
+    font-family: "Montserrat", sans-serif;
+    background-color: #eee;
+    margin: 30px auto;
+    color: #292929;
+    word-break: break-word;
+}
+
+@media (max-width: 767px) {
+    .body {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}
+
+.header {
+    font-size: 25px;
+    font-weight: 800;
+    color: #292929;
+    padding: 10px 0;
+}
+
+.section__text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #292929;
+    padding: 15px 10px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px auto;
+    margin: 10px 0;
+    box-shadow: 0 0 5px #ddd;
+}
+
+.section__list {
+    padding: 10px;
+}
