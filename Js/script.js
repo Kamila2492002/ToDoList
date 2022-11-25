@@ -3,126 +3,126 @@
     let hideDoneTasks = false;
 
     const addNewTask = (newTaskContent) => {
-        tasks = [
+        tasks =[
             ...tasks,
-            {
-                content: newTaskContent,
-            }
+            { content: newTaskContent },
         ];
-
         render();
     };
 
     const removeTask = (index) => {
-        tasks = [
-            ...tasks.slice(0, index),
-            ...tasks.slice(index + 1),
+        tasks =[
+            ...tasks.slice(0,index),
+            ...tasks.slice(index+1),
         ];
 
         render();
     };
 
     const toggleTaskDone = (index) => {
-        tasks = [
-            ...tasks.slice(0, index),
-            {...tasks[index], done: !tasks[index].done},
-            ...tasks.slice(index + 1),
+        tasks=[
+            ...tasks.slice(0,index),
+            { ...tasks[index],
+                done: !tasks[index].done,},
+            ...tasks.slice(index+1),
         ];
 
         render();
     };
 
+    const setAllDone = () => {
+        tasks=tasks.map((task)=>({
+        ...task,
+        done: true,
+    }));
+    
+        render();
+    };
+
+    const hideDone = () => {
+        hideDoneTasks=!hideDoneTasks;
+
+        render();
+    };
+
     const bindEvent = () => {
-        const removeButtons = document.querySelectorAll(".js-remove");
-
-        removeButtons.forEach((removeButton, index) => {
-            removeButton.addEventListener("click", () => {
-                removeTask(index);
-            });
-        });
-
         const toggleDoneButtons = document.querySelectorAll(".js-done");
-
         toggleDoneButtons.forEach((toggleDoneButton, index) => {
             toggleDoneButton.addEventListener("click", () => {
                 toggleTaskDone(index);
-            });
+            })
+
         });
+
+        const removeButtons = document.querySelectorAll(".js-remove");
+        removeButtons.forEach((removeButton, index) => {
+            removeButton.addEventListener("click", () => {
+                removeTask(index);
+            })
+
+        });
+    };
+
+    const bindButtonsEvents = () => {
+        const hideDoneButton = document.querySelector(".js-hideDoneButton");
+        if(hideDoneButton){
+            hideDoneButton.addEventListener("click", () => {
+                hideDone();
+            });
+        }
+        
+        const setAllDoneButton = document.querySelector(".js-setAllDoneButton");
+        if(hideDoneButton){
+            setAllDoneButton.addEventListener("click", () => {
+                setAllDone();
+            });
+        }
     };
 
     const renderTasks = () => {
         let htmlString = "";
         const liClasses = hideDoneTasks ? "list__items--hidden\"" : "\"";
+
         for (const task of tasks) {
             htmlString += `
         <li class="list__items ${task.done ? liClasses : "\""}>  
         <button class="list__button js-done"></button>
         <span ${task.done ? "class=\"list__items--done\"" : ""}>${task.content}</span>
         <button class="list__button list__button--remove js-remove">🗑</button>
-        </li> `;
+        </li>
+        `;
         }
 
         document.querySelector(".js-tasks").innerHTML = htmlString;
     };
 
-    const setAllTasksDone = () => {
-      tasks=tasks.map((task) => ({
-        ...task,
-        done: true,
-      }))
-
-        render();
-    };
-
-    const toggleHideDoneTasks = () => {
-        hideDoneTasks= !hideDoneTasks;
-
-        render();
-    };
-
-    const ButtonEvents = () => {
-        const setAllTasksDoneButton = document.querySelector(".js-setAllTasksDone");
-
-        if (setAllTasksDoneButton) {
-            setAllTasksDoneButton.addEventListener("click", () => {
-                setAllTasksDone();
-            }); 
-        }
-
-        const toggleHideDoneTasksButton = document.querySelector(".js-hideDoneTask");
-
-        if (toggleHideDoneTasksButton) {
-            toggleHideDoneTasksButton.addEventListener("click", () => {
-                toggleHideDoneTasks();
-            });
-        }
-    };
-
-    const renderButton = () => {
+    const renderButtons = () => {
         let htmlString = "";
         if(tasks.length)
         {
             htmlString=`
-            <button class="form__button form__button--listHeader js-toggleHideDoneTasksButton">${hideDoneTasks ? "Pokaż ukończone":"Ukryj ukończone"}</button>
-            <button class="form__button form__button--listHeader js-setAllTasksDone ${tasks.every(({ done }) => done) ? "disabled" : ""}>Ukończ wszystkie</button>
-            `;
+            <button class="form__buttons form__buttons--listHeader js-hideDoneButton">${hideDoneTasks ? "Pokaż ukończone":"Ukryj ukończone"}</button>
+            <button class="form__buttons form__buttons--listHeader js-setAllDoneButton" ${tasks.every(({ done }) => done) ? "disabled" : ""}>Ukończ wszystkie</button>`;
         }
 
-        document.querySelector(".js-ButtonEvents").innerHTML = htmlString;
+        document.querySelector(".js-headerButtons").innerHTML = htmlString;
     };
-
 
     const render = () => {
         renderTasks();
-        renderButton();
-
-        ButtonEvents();
+        renderButtons();
         bindEvent();
+        bindButtonsEvents();
+
+        const toggleDoneButtons = document.querySelectorAll(".js-done");
+        toggleDoneButtons.forEach((toggleDoneButton, index) => {
+            if (tasks[index].done) { toggleDoneButton.innerHTML = "&#10004" };
+        });
     };
 
     const onFormSubmit = (event) => {
-
         event.preventDefault();
+
         const newTaskInput = document.querySelector(".js-newTask");
         const newTaskContent = newTaskInput.value.trim();
         if (newTaskContent === "") {
@@ -133,15 +133,13 @@
         addNewTask(newTaskContent);
         newTaskInput.value = "";
         newTaskInput.focus();
-    }
+    };
 
     const init = () => {
         render();
 
-        const form = document.querySelector(".js-form")
-
+        const form = document.querySelector(".js-form");
         form.addEventListener("submit", onFormSubmit);
     };
-
     init();
-} 
+}
