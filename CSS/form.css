@@ -1,8 +1,6 @@
 .form {
-    padding: 20px;
     display: grid;
     grid-template-columns: 1fr auto;
-    border: none;
     grid-gap: 20px;
 }
 
@@ -17,53 +15,39 @@
     color: #fff;
     padding: 10px;
     border: none;
+    transition: 0.5s;
 }
 
-.form__button:hover{
-    border: 1.5px solid #292929;
-    cursor: pointer;
+.form__button--hidden{
+    display: block;
+}
+
+.form__button--listHeader:hover{
+    color: teal;
+    border: none;
+    background: #292929;
+    padding: 0;
 }
 
 .form__input {
-    flex-basis: 78%;
+    border: 1px solid #ddd;
     padding: 10px;
 }
 
-.form__input:hover {
-    border:  1.5px solid #292929;
+.form__buttton--input:hover {
+    background: hsl(180, 100%, 30%);
+    transform: scale(1.1);
     cursor: pointer;
 }
 
-.list__items {
-    display: grid;
-    grid-template-columns:  auto 1fr auto;
-    text-decoration: none;
-    grid-gap: 10px;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
+.form__button--listHeader:disabled{
+    color: rgb(189,189,189);
+    cursor: not-allowed;
+}
+
+.form__button--input:active{
+    border: none;
+    color: #fff;
     padding: 10px;
-}
-
-.list__button {
-    width: 21px;
-    height: 21px;
-    border: none;
-    text-decoration: none;
-    background-color: rgb(22, 143, 22);
-}
-
-.list__button--done {
-    background-color: rgb(22, 143, 22);
-    text-decoration: none;
-    border: none;
-    color: #fff;
-}
-
-.list__button--delete {
-    background-color: crimson;
-    color: #fff;
-    order: 1;
-    width: 21px;
-    height: 21px;
-    border: none;
+    background: hsl(180, 100%, 35%);
 }

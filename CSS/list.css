@@ -1,0 +1,48 @@
+.list{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list__items{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 15px;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.list__button{
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: hsl(120, 100%, 25%);
+    color: white;
+    padding: 0px;
+    text-decoration: none;
+    transition: 1s;
+}
+
+.list__button:hover{
+    background-color: hsl(120, 100%, 35%);
+    cursor: pointer;
+}
+
+.list__button:active{
+    background-color: hsl(120, 100%, 40%);
+}
+
+.list__button--remove{
+    background-color: hsl(348, 83%, 47%);
+}
+
+.list__items--done{
+    text-decoration: line-through;
+}
+
+.list__items--hidden{
+    display: none;
+}
+
