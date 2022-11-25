@@ -18,15 +18,16 @@
     transition: 0.5s;
 }
 
-.form__button--hidden{
-    display: block;
+.form__buttons {
+    color: teal;
+    padding: 10px;
+    transition: 0.5s;
+    border: none;
+    background: #fff;
 }
 
-.form__button--listHeader:hover{
-    color: teal;
-    border: none;
-    background: #292929;
-    padding: 0;
+.form__buttons--hidden{
+    display: block;
 }
 
 .form__input {
@@ -34,13 +35,13 @@
     padding: 10px;
 }
 
-.form__buttton--input:hover {
+.form__button--input:hover {
     background: hsl(180, 100%, 30%);
     transform: scale(1.1);
     cursor: pointer;
 }
 
-.form__button--listHeader:disabled{
+.form__buttons--listHeader:disabled{
     color: rgb(189,189,189);
     cursor: not-allowed;
 }
